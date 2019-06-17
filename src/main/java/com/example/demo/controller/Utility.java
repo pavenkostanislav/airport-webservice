@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-public class UtilityController {
+public class Utility {
 
 	public static HttpHeaders setMediaType(String format) {
 		HttpHeaders httpHeaders = new HttpHeaders();

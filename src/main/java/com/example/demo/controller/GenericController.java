@@ -29,7 +29,7 @@ public class GenericController<T> {
 			@RequestParam(value = "format", defaultValue = "json") String format,
 			@RequestBody T row) {
 		item.save(row);
-		return new ResponseEntity<>("Ok", UtilityController.setMediaType(format), HttpStatus.OK);
+		return new ResponseEntity<>("Ok", Utility.setMediaType(format), HttpStatus.OK);
 	}
 	
 	@GetMapping(
@@ -40,7 +40,7 @@ public class GenericController<T> {
 			@RequestParam(value = "format", defaultValue = "json") String format,
 			@PathVariable("aid") int aid) {
         Optional<T> row = item.findById(aid);
-		return new ResponseEntity<>(row, UtilityController.setMediaType(format), HttpStatus.OK);
+		return new ResponseEntity<>(row, Utility.setMediaType(format), HttpStatus.OK);
 	}
 
 	
@@ -53,7 +53,7 @@ public class GenericController<T> {
 	@PostMapping("/all")
 	public ResponseEntity<Iterable<T>> getAll(
 			@RequestParam(value = "format", defaultValue = "json") String format) {
-		HttpHeaders httpHeaders = UtilityController.setMediaType(format);
+		HttpHeaders httpHeaders = Utility.setMediaType(format);
         Iterable<T> rows = item.findAll();
 		return new ResponseEntity<>(rows, httpHeaders, HttpStatus.OK);
 	}
