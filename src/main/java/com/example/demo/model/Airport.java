@@ -29,4 +29,12 @@ public class Airport {
 	@JoinColumn(name = "scheduleId")
 	private Schedule schedule;
 
+	public int getCountLane() {
+		return countLane;
+	}
+
+	public void setCountLane(int countLane) {
+		this.countLane = countLane;
+	}
+
 }

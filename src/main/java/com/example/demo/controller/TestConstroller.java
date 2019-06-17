@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class RestConstroller {
+public class TestConstroller {
 	
     @RequestMapping(value = "/helloWorld",
             method=RequestMethod.GET,
