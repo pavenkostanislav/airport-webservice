@@ -1,28 +1,36 @@
 package com.example.demo.model;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "Lane")
+@Table(name = "lane")
 public class Lane {
 
 	@Id
-	@GeneratedValue
-	private int ID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long ID;
 
-	@NotNull
+	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
 	private String strip;
 	
 
-	@NotNull
+	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
+	@Column(
+	        name = "airport_Id",
+	        nullable = false
+    )
 	private int airportId;
 	
 
-
+	
 	public String getStrip() {
 		return strip;
 	}
@@ -42,8 +50,9 @@ public class Lane {
 	}
 
 
-	public int getID() {
+	public Long getID() {
 		return ID;
 	}
+
 
 }

@@ -21,8 +21,7 @@ public class GenericController<T> {
 	@Autowired
 	CrudRepository<T, Integer> item;
 	
-	@PutMapping(
-			value = "",
+	@PutMapping(value = "",
             produces={MediaType.APPLICATION_JSON_VALUE,
             		MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<String> putItem(
@@ -32,30 +31,30 @@ public class GenericController<T> {
 		return new ResponseEntity<>("Ok", Utility.setMediaType(format), HttpStatus.OK);
 	}
 	
-	@GetMapping(
-			value = "/{aid}",
+	@GetMapping(value = "/{id}",
             produces={MediaType.APPLICATION_JSON_VALUE, 
                       MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Optional<T>> getItem(
 			@RequestParam(value = "format", defaultValue = "json") String format,
-			@PathVariable("aid") int aid) {
-        Optional<T> row = item.findById(aid);
+			@PathVariable("id") Integer id) {
+        Optional<T> row = item.findById(id);
 		return new ResponseEntity<>(row, Utility.setMediaType(format), HttpStatus.OK);
 	}
 
 	
-	@DeleteMapping(value = "/{aid}")
-	public ResponseEntity<Void> deleteItem(@PathVariable("aid") int aid) {		
-		item.deleteById(aid);
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteItem(@PathVariable("id") Integer id) {		
+		item.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping("/all")
+	@PostMapping(value = "/all",
+            produces={MediaType.APPLICATION_JSON_VALUE, 
+                    MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<T>> getAll(
 			@RequestParam(value = "format", defaultValue = "json") String format) {
-		HttpHeaders httpHeaders = Utility.setMediaType(format);
         Iterable<T> rows = item.findAll();
-		return new ResponseEntity<>(rows, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<>(rows, Utility.setMediaType(format), HttpStatus.OK);
 	}
 
 }

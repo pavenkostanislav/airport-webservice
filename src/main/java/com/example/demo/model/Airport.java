@@ -1,27 +1,35 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
+import org.hibernate.annotations.NaturalId;
+
+@Entity(name = "Airport")
+@Table(name = "airport")
 public class Airport {
 	
 	@Id
-	@GeneratedValue
-	private int ID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long ID;
 
-	@NotNull
+	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
 	private String city;
 
-	@NotNull
+	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
+    @NaturalId
 	private String IATACode;
 
-	@NotNull
+	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
 	private int countLane;
 
-	@NotNull
+	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
 	private int scheduleId;
 
 	public int getCountLane() {
