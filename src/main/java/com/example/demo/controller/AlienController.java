@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dao.AlienRepo;
+import com.example.demo.dao.IAlien;
 import com.example.demo.model.Alien;
 
 @RestController
 @RequestMapping("/api")
 public class AlienController{
 	@Autowired
-	AlienRepo repo;
+	IAlien repo;
 	
 	@RequestMapping("/")
 	public String main() {

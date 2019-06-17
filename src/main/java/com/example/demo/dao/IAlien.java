@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.model.Alien;
 
-public interface AlienRepo extends CrudRepository<Alien, Integer> {
+public interface IAlien extends CrudRepository<Alien, Integer> {
 
 }
