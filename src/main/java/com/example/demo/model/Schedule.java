@@ -5,11 +5,6 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Schedule {
@@ -18,20 +13,44 @@ public class Schedule {
 	@GeneratedValue
 	private int ID;
 
-    @Temporal(TemporalType.TIMESTAMP)
-	public Date arrival;
+	private Date arrival;
 
-    @Temporal(TemporalType.TIMESTAMP)
-	public Date departure;
+	private Date departure;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "laneId")
-	public Lane lane;
+	private int laneId;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "flightId")
-	public Flight flight;
+	private int flightId;
+
+	public Date getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Date arrival) {
+		this.arrival = arrival;
+	}
+
+	public Date getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(Date departure) {
+		this.departure = departure;
+	}
+
+	public int getLaneId() {
+		return laneId;
+	}
+
+	public void setLaneId(int laneId) {
+		this.laneId = laneId;
+	}
+
+	public int getFlightId() {
+		return flightId;
+	}
+
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
 
 }
