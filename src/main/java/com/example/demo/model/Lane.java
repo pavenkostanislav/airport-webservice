@@ -25,7 +25,7 @@ public class Lane implements IClean {
 	@NotNull
 	private String strip;
 	
-	@Column(name="airport_Id")
+	@Column(name="airport_id")
 	private Long airportId;
 	
 
