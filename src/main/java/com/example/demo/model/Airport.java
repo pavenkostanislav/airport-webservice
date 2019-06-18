@@ -23,23 +23,21 @@ public class Airport implements IClean {
 	@Column(name = "id")
 	private Long ID;
 
+	@Column(name="city", nullable=true)
 	private String city;
 
-	@Column(name="iata_code", unique=true)
+	@Column(name="iata_code", unique=true, nullable=true)
 	private String IATACode;
 
 	@Column(name="lane_count")
 	private int countLane;
 
-	@Column(name="schedule_id")
-	private int scheduleId;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="schedule_id", insertable=false, updatable=false)	
-	private Schedule schedule;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Lane> lanes;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Schedule> schedules;
 	
 	public Long getID() {
 		return ID;
@@ -73,33 +71,18 @@ public class Airport implements IClean {
 		IATACode = iATACode;
 	}
 
-	public int getScheduleId() {
-		return scheduleId;
-	}
-
-	public void setScheduleId(int scheduleId) {
-		this.scheduleId = scheduleId;
-	}
-
 	@Override
 	public void clean() {
-		this.schedule = null;
+		// TODO Auto-generated method stub
+		
 	}
 
-	public Schedule getSchedule() {
-		return schedule;
+	public List<Schedule> getSchedules() {
+		return schedules;
 	}
 
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
-
-	public List<Lane> getLanes() {
-		return lanes;
-	}
-
-	public void setLanes(List<Lane> lanes) {
-		this.lanes = lanes;
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 }

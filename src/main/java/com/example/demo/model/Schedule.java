@@ -24,6 +24,9 @@ public class Schedule implements IClean {
 	@Column(name = "id")
 	private Long ID;
 
+	@Column(name="flight")
+	private String flight;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date arrival;
 
@@ -31,18 +34,18 @@ public class Schedule implements IClean {
 	private Date departure;
 
 	@Column(name="lane_id")
-	private int laneId;
-
-	@Column(name="flight_id")
-	private int flightId;
+	private Long laneId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="lane_id", insertable=false, updatable=false)
 	private Lane lane;
 	
+	@Column(name="airport_id")
+	private Long airportId;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="flight_id", insertable=false, updatable=false)
-	private Flight flight;
+	@JoinColumn(name="airport_id", insertable=false, updatable=false)
+	private Airport airport;
 	
 	public Long getID() {
 		return ID;
@@ -68,26 +71,10 @@ public class Schedule implements IClean {
 		this.departure = departure;
 	}
 
-	public int getLaneId() {
-		return laneId;
-	}
-
-	public void setLaneId(int laneId) {
-		this.laneId = laneId;
-	}
-
-	public int getFlightId() {
-		return flightId;
-	}
-
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
-	}
-
 	@Override
 	public void clean() {
 		this.lane = null;
-		this.flight = null;
+		this.setFlight(null);
 	}
 
 	public Lane getLane() {
@@ -98,12 +85,20 @@ public class Schedule implements IClean {
 		this.lane = lane;
 	}
 
-	public Flight getFlight() {
+	public String getFlight() {
 		return flight;
 	}
 
-	public void setFlight(Flight flight) {
+	public void setFlight(String flight) {
 		this.flight = flight;
+	}
+
+	public Airport getAirport() {
+		return airport;
+	}
+
+	public void setAirport(Airport airport) {
+		this.airport = airport;
 	}
 
 }

@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Collections;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -17,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dao.IClean;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 
 public class GenericController<T extends IClean> {

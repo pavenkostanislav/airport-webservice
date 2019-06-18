@@ -8,9 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.example.demo.dao.IClean;
 
@@ -22,14 +21,14 @@ public class Lane implements IClean {
 	@Column(name = "id")
 	private Long ID;
 
-	@NotNull
+	@Column(name="strip", nullable=true)
 	private String strip;
 	
-	@Column(name="airport_id")
+	@Column(name="airport_id", nullable=true)
 	private Long airportId;
 	
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "airport_id", insertable=false, updatable = false)
 	private Airport airport;
 	
