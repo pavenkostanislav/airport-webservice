@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.model.Lane;
 
-public interface ILane extends CrudRepository<Lane, Integer> {
+public interface ILane extends CrudRepository<Lane, Long> {
 
 }

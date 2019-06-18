@@ -1,0 +1,1 @@
+INSERT INTO AIRPORT (city, iata_code, lane_count, schedule_id) VALUES ('city1', 'code1' , 0, null);

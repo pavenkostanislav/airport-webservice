@@ -1,37 +1,54 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.NaturalId;
+import com.example.demo.dao.IClean;
 
 @Entity(name = "Airport")
 @Table(name = "airport")
-public class Airport {
-	
+public class Airport implements IClean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;
 
-	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
 	private String city;
 
-	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
-    @NaturalId
+	@Column(name="iata_code", unique=true)
 	private String IATACode;
 
-	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
+	@Column(name="lane_count")
 	private int countLane;
 
-	@NotNull(message = "{com.example.demo.controller.Vocabulary.notNull}")
+	@Column(name="schedule_id")
 	private int scheduleId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="schedule_id", insertable=false, updatable=false)	
+	private Schedule schedule;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Lane> lanes;
+	
+	public Long getID() {
+		return ID;
+	}
 
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
+	
 	public int getCountLane() {
 		return countLane;
 	}
@@ -62,6 +79,27 @@ public class Airport {
 
 	public void setScheduleId(int scheduleId) {
 		this.scheduleId = scheduleId;
+	}
+
+	@Override
+	public void clean() {
+		this.schedule = null;
+	}
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+
+	public List<Lane> getLanes() {
+		return lanes;
+	}
+
+	public void setLanes(List<Lane> lanes) {
+		this.lanes = lanes;
 	}
 
 }

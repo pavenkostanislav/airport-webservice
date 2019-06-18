@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.model.Airport;
 
-public interface IAirport extends CrudRepository<Airport, Integer> {
+public interface IAirport extends CrudRepository<Airport, Long> {
 
 }
