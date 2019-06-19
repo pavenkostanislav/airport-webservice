@@ -13,57 +13,98 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.dao.IClean;
+import com.example.demo.dao.ICleanAndId;
 
 
-public class GenericController<T extends IClean> {
+public class GenericController<T extends ICleanAndId> {
 	@Autowired
 	CrudRepository<T, Long> item;
 	
 	@PostMapping(value = "",
             produces={MediaType.APPLICATION_JSON_VALUE,
             		  MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<String> postItem(
+	public ResponseEntity<Object> postItem(
 			@RequestParam(value = "format", defaultValue = "json") String format,
 			@RequestBody T row) {
-		item.save(row);
-		return new ResponseEntity<>("Ok", Utility.setMediaType(format), HttpStatus.OK);
+		try { 
+			T objFromDb = item.save(row);
+		objFromDb.clean();
+		return new ResponseEntity<>(objFromDb, Utility.setMediaType(format), HttpStatus.OK);
+	} catch(Exception e) {
+		return ResponseEntity
+				.badRequest()
+		        .body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
+	}
 	}
 
 	@PutMapping(value = "/{id:\\d+}",
             produces={MediaType.APPLICATION_JSON_VALUE,
             		  MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<T> putItem(
+	public ResponseEntity<Object> putItem(
 			@RequestParam(value = "format", defaultValue = "json") String format,
 			@PathVariable("id") Long id,
 			@RequestBody T body) {
-		item.save(body);
-		return new ResponseEntity<>(body, Utility.setMediaType(format), HttpStatus.OK);
+		try { 
+			T obj = item.findById(id).orElseThrow(null);
+			if(obj == null) {
+				throw new Exception("Data is not found");
+			}
+			T objFromDb = item.save(body);
+			objFromDb.clean();
+			return new ResponseEntity<>(objFromDb, Utility.setMediaType(format), HttpStatus.OK);
+		} catch(Exception e) {
+			return ResponseEntity
+					.badRequest()
+			        .body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
+		}
 	}
 
 	@GetMapping(value = "/{id:\\d+}",
             produces={MediaType.APPLICATION_JSON_VALUE, 
                       MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<T> getItem(
+	public ResponseEntity<Object> getItem(
 			@RequestParam(value = "format", defaultValue = "json") String format,
-			@PathVariable("id") Long id) {		
+			@PathVariable("id") Long id) {	
+		try { 	
 		T obj = item.findById(id).orElseThrow(null);
 		obj.clean();
 		return new ResponseEntity<>(obj, Utility.setMediaType(format), HttpStatus.OK);
+	} catch(Exception e) {
+		return ResponseEntity
+				.badRequest()
+		        .body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
+	}
 	}
 	
 	@DeleteMapping(value = "/{id:\\d+}")
-	public ResponseEntity<Void> deleteItem(@PathVariable("id") Long id) {		
+	public ResponseEntity<Object> deleteItem(@PathVariable("id") Long id) {	
+		try { 	
 		item.deleteById(id);
 		return ResponseEntity.noContent().build();
+	} catch(Exception e) {
+		return ResponseEntity
+				.badRequest()
+		        .body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
+	}
 	}
 	
 	@PostMapping(value = "/all",
             produces={MediaType.APPLICATION_JSON_VALUE, 
                       MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Iterable<T>> getAll(
+	public ResponseEntity<Object> getAll(
 			@RequestParam(value = "format", defaultValue = "json") String format) {
+		try { 
+		Iterable<T> collection = item.findAll();
+		
+		collection.forEach(row -> {
+		    row.clean();
+		});
 		return new ResponseEntity<>(item.findAll(), Utility.setMediaType(format), HttpStatus.OK);
+	} catch(Exception e) {
+		return ResponseEntity
+				.badRequest()
+		        .body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
+	}
 	}
 
 }

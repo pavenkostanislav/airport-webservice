@@ -14,11 +14,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.example.demo.dao.IClean;
+import com.example.demo.dao.ICleanAndId;
 
 @Entity(name = "Schedule")
 @Table(name = "schedule")
-public class Schedule implements IClean {
+public class Schedule implements ICleanAndId {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

@@ -11,11 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.example.demo.dao.IClean;
+import com.example.demo.dao.ICleanAndId;
 
 @Entity(name = "Lane")
 @Table(name = "lane")
-public class Lane implements IClean {
+public class Lane implements ICleanAndId {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

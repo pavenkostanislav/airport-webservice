@@ -13,11 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.example.demo.dao.IClean;
+import com.example.demo.dao.ICleanAndId;
 
 @Entity(name = "Airport")
 @Table(name = "airport")
-public class Airport implements IClean {
+public class Airport implements ICleanAndId {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
