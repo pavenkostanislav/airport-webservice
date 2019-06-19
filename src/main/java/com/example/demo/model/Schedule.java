@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.demo.controller.Vocabulary;
+import com.example.demo.controller.VocabularyKeys;
 import com.example.demo.dao.ICleanAndId;
 
 @Entity(name = "Schedule")
@@ -59,7 +61,10 @@ public class Schedule implements ICleanAndId {
 		return arrival;
 	}
 
-	public void setArrival(Date arrival) {
+	public void setArrival(Date arrival) throws Exception {
+		if(arrival == null) {
+			throw new Exception(Vocabulary.dictionary.get(VocabularyKeys.notNull));
+		}
 		this.arrival = arrival;
 	}
 
