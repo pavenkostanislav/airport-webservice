@@ -36,6 +36,7 @@ public class GenericController<T extends ICleanAndId> {
 		try {
 			return new ResponseEntity<>(srv.set(this.crudRepository, body), Utility.setMediaType(format), HttpStatus.OK);
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity
 					.badRequest()
 					.body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
@@ -52,6 +53,7 @@ public class GenericController<T extends ICleanAndId> {
 		try { 
 			return new ResponseEntity<>(srv.put(this.crudRepository, id, body), Utility.setMediaType(format), HttpStatus.OK);
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity
 					.badRequest()
 			        .body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
@@ -67,6 +69,7 @@ public class GenericController<T extends ICleanAndId> {
 		try {
 			return new ResponseEntity<>(srv.get(this.crudRepository, id), Utility.setMediaType(format), HttpStatus.OK);
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity
 					.badRequest()
 					.body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
@@ -79,6 +82,7 @@ public class GenericController<T extends ICleanAndId> {
 			srv.delete(this.crudRepository, id);
 			return ResponseEntity.noContent().build();
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity
 					.badRequest()
 					.body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
@@ -93,6 +97,7 @@ public class GenericController<T extends ICleanAndId> {
 		try {
 			return new ResponseEntity<>(srv.getAll(this.crudRepository), Utility.setMediaType(format), HttpStatus.OK);
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity
 					.badRequest()
 					.body(Vocabulary.dictionary.get(VocabularyKeys.badRequest));

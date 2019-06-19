@@ -7,8 +7,8 @@ import com.example.demo.controller.VocabularyKeys;
 import com.example.demo.dao.ICleanAndId;
 
 
-public class GenericService<T extends ICleanAndId> {	
-	public T set(CrudRepository<T, Long> crudRepository, T row) {
+public class GenericService<T extends ICleanAndId> {	 
+	public T set(CrudRepository<T, Long> crudRepository, T row) throws Exception {
 		T objFromDb = crudRepository.save(row);
 		objFromDb.clean();
 		return objFromDb;

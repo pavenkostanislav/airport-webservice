@@ -11,5 +11,7 @@ public class ScheduleController extends GenericController<Schedule> {
 
 	public ScheduleController() {
 		super(new ScheduleService());
+		//super(new GenericService<Schedule, ISchedule>());
+		//super(new GenericService<Schedule, CrudRepository<Schedule, Long>>());
 	}
 }
