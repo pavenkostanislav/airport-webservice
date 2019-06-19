@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.demo.model.Schedule;
 
 public interface ISchedule extends CrudRepository<Schedule, Long> {
-	//@Query("from Schedule s where c.name=:categoryName  FROM SCHEDULE S WHERE NOT (S.ARRIVAL > :UNTIL  OR S.DEPARTURE < :FROM)")
-	//public Iterable<Schedule> findByPeriod(@Param("FROM") Calendar from, @Param("UNTIL") Calendar until);
+	//@Query(value = "SELECT COUNT(S) FROM schedule S WHERE NOT (S.arrival > :dtuntil  OR S.departure < :dtfrom)")
+	//public Long countFlightByPeriod();
 }
