@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.example.demo.controller.Vocabulary;
-import com.example.demo.controller.VocabularyKeys;
 import com.example.demo.dao.ICleanAndId;
 
 @Entity(name = "Schedule")
@@ -30,10 +28,10 @@ public class Schedule implements ICleanAndId {
 	private String flight;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date arrival;
+	private Calendar arrival;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date departure;
+	private Calendar departure;
 
 	@Column(name="lane_id")
 	private Long laneId;
@@ -57,29 +55,26 @@ public class Schedule implements ICleanAndId {
 		this.ID = ID;
 	}
 
-	public Date getArrival() {
+	public Calendar getArrival() {
 		return arrival;
 	}
 
-	public void setArrival(Date arrival) throws Exception {
-		if(arrival == null) {
-			throw new Exception(Vocabulary.dictionary.get(VocabularyKeys.notNull));
-		}
+	public void setArrival(Calendar arrival) {
 		this.arrival = arrival;
 	}
 
-	public Date getDeparture() {
+	public Calendar getDeparture() {
 		return departure;
 	}
 
-	public void setDeparture(Date departure) {
+	public void setDeparture(Calendar departure) {
 		this.departure = departure;
 	}
 
 	@Override
 	public void clean() {
 		this.lane = null;
-		this.setFlight(null);
+		this.airport = null;
 	}
 
 	public Lane getLane() {
@@ -104,6 +99,22 @@ public class Schedule implements ICleanAndId {
 
 	public void setAirport(Airport airport) {
 		this.airport = airport;
+	}
+
+	public Long getAirportId() {
+		return airportId;
+	}
+
+	public void setAirportId(Long airportId) {
+		this.airportId = airportId;
+	}
+
+	public Long getLaneId() {
+		return laneId;
+	}
+
+	public void setLaneId(Long laneId) {
+		this.laneId = laneId;
 	}
 
 }
