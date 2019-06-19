@@ -24,7 +24,7 @@ public class Schedule implements ICleanAndId {
 	@Column(name = "id")
 	private Long ID;
 
-	@Column(name="flight")
+	@Column(name="flight", nullable=false)
 	private String flight;
 
 	@Temporal(TemporalType.TIMESTAMP)

@@ -21,10 +21,10 @@ public class Lane implements ICleanAndId {
 	@Column(name = "id")
 	private Long ID;
 
-	@Column(name="strip", nullable=true)
+	@Column(name="strip", nullable=false)
 	private String strip;
 	
-	@Column(name="airport_id", nullable=true)
+	@Column(name="airport_id", nullable=false)
 	private Long airportId;
 	
 

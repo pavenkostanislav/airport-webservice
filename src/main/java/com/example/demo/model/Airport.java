@@ -23,7 +23,7 @@ public class Airport implements ICleanAndId {
 	@Column(name = "id")
 	private Long ID;
 
-	@Column(name="city", nullable=true)
+	@Column(name="city", nullable=false)
 	private String city;
 
 	@Column(name="iata_code", unique=true, nullable=true)
