@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,11 @@ import com.example.demo.service.GenericService;
 public class GenericController<T extends ICleanAndId> {
 	@Autowired
 	private CrudRepository<T, Long> crudRepository;
-	private GenericService<T> srv = new GenericService<T>();
+	private GenericService<T> srv;
+	
+	public GenericController(GenericService<T> _srv) {
+		this.srv = _srv;
+	}
 	
 	@PostMapping(value = "",
             produces={MediaType.APPLICATION_JSON_VALUE,
