@@ -18,12 +18,12 @@ import com.example.demo.dao.ICleanAndId;
 import com.example.demo.service.GenericService;
 
 
-public class GenericController<T extends ICleanAndId> {
+public class GenericController<T extends ICleanAndId, U extends CrudRepository<T, Long>> {
 	@Autowired
-	private CrudRepository<T, Long> crudRepository;
-	private GenericService<T> srv;
+	private U crudRepository;
+	private GenericService<T,U> srv;
 	
-	public GenericController(GenericService<T> _srv) {
+	public GenericController(GenericService<T,U> _srv) {
 		this.srv = _srv;
 	}
 	

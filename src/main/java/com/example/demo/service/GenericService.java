@@ -7,14 +7,14 @@ import com.example.demo.controller.VocabularyKeys;
 import com.example.demo.dao.ICleanAndId;
 
 
-public class GenericService<T extends ICleanAndId> {	 
-	public T set(CrudRepository<T, Long> crudRepository, T row) throws Exception {
+public class GenericService<T extends ICleanAndId, U extends CrudRepository<T, Long>> {	 
+	public T set(U crudRepository, T row) throws Exception {
 		T objFromDb = crudRepository.save(row);
 		objFromDb.clean();
 		return objFromDb;
 	}
 
-	public T put(CrudRepository<T, Long> crudRepository, Long id, T obj) throws Exception {
+	public T put(U crudRepository, Long id, T obj) throws Exception {
 			if(obj.getID().longValue() != id) {
 				throw new Exception(Vocabulary.dictionary.get(VocabularyKeys.notFound));
 			}
@@ -25,18 +25,18 @@ public class GenericService<T extends ICleanAndId> {
 			return this.set(crudRepository, obj);
 	}
 
-	public T get(CrudRepository<T, Long> crudRepository, Long id) {
+	public T get(U crudRepository, Long id) {
 		T obj = crudRepository.findById(id).orElseThrow(null);
 		obj.clean();
 		return obj;
 	}
 	
-	public Long delete(CrudRepository<T, Long> crudRepository, Long id) {
+	public Long delete(U crudRepository, Long id) {
 		crudRepository.deleteById(id);
 		return id;
 	}
 	
-	public Iterable<T> getAll(CrudRepository<T, Long> crudRepository) {
+	public Iterable<T> getAll(U crudRepository) {
 		Iterable<T> collection = crudRepository.findAll();
 		
 		collection.forEach(row -> {

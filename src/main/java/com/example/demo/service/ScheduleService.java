@@ -7,12 +7,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.controller.Vocabulary;
 import com.example.demo.controller.VocabularyKeys;
+import com.example.demo.dao.ISchedule;
 import com.example.demo.model.Schedule;
 
 
-public class ScheduleService extends GenericService<Schedule> {
+public class ScheduleService extends GenericService<Schedule, ISchedule> {
 	@Override
-	public Schedule set(CrudRepository<Schedule, Long> crudRepository, Schedule row) throws Exception {
+	public Schedule set(ISchedule crudRepository, Schedule row) throws Exception {
 		if(!this.verifyEmptyLane(crudRepository, row)) {
 			throw new Exception(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
 		}
