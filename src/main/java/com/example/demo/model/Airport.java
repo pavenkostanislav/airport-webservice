@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 import com.example.demo.dao.ICleanAndId;
 
 @Entity(name = "Airport")
@@ -29,6 +31,7 @@ public class Airport implements ICleanAndId {
 	@Column(name="iata_code", unique=true, nullable=true)
 	private String IATACode;
 
+	@Formula("(select count(*) from Lane l where l.airport_id = id)")
 	@Column(name="lane_count")
 	private int countLane;
 
