@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -29,7 +30,7 @@ public class ScheduleService extends GenericService<Schedule, ISchedule> {
 		return calendar;
 	}
 	
-	private boolean verifyEmptyLane(ISchedule scheduleRepository, Schedule row) {
+	private boolean verifyEmptyLane(ISchedule scheduleRepository, Schedule row) throws SQLException {
 		long countFlightByPeriod =  scheduleRepository.countFlightByPeriod(row.getArrival(), row.getDeparture(), row.getAirportId().longValue());
 		return countFlightByPeriod < 2;
 	}

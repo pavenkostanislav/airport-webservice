@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import com.example.demo.model.Schedule;
 
 public interface ISchedule extends CrudRepository<Schedule, Long> {
-	@Query(value = "select count(s) from schedule s where not (s.arrival > :dtuntil or s.departure < :dtfrom) and s.airport_id = :airportid")
+	@Query(value = "select count(s) from Schedule s where not (s.arrival > :dtuntil or s.departure < :dtfrom) and s.airportId = :airportid")
 	public Long countFlightByPeriod(@Param("dtfrom") Calendar dtfrom, @Param("dtuntil") Calendar dtuntil, @Param("airportid") Long airportid);
 }
