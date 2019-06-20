@@ -2,11 +2,13 @@ package com.example.demo.service;
 
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import com.example.demo.controller.Vocabulary;
 import com.example.demo.controller.VocabularyKeys;
 import com.example.demo.dao.ISchedule;
+import com.example.demo.model.Airport;
 import com.example.demo.model.Schedule;
 
 public class ScheduleService extends GenericService<Schedule, ISchedule> {
@@ -31,7 +33,12 @@ public class ScheduleService extends GenericService<Schedule, ISchedule> {
 	}
 	
 	private boolean verifyEmptyLane(ISchedule scheduleRepository, Schedule row) throws SQLException {
-		long countFlightByPeriod =  scheduleRepository.countFlightByPeriod(row.getArrival(), row.getDeparture(), row.getAirportId().longValue());
-		return countFlightByPeriod < 2;
+		Calendar from = row.getArrival();
+		Calendar until = row.getDeparture();
+		Long airportid = row.getAirportId().longValue();
+		int countFlightByPeriodActual =  scheduleRepository.countFlightByPeriod(from, until, airportid);
+		int countLaneInAirport = scheduleRepository.countLaneInAirport(airportid);
+		
+		return countFlightByPeriodActual < countLaneInAirport;
 	}
 }

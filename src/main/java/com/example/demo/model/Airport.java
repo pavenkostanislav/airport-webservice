@@ -30,7 +30,6 @@ public class Airport implements ICleanAndId {
 	private String IATACode;
 
 	@Formula("(select count(*) from Lane l where l.airport_id = id)")
-	@Column(name="lane_count")
 	private int countLane;
 
 	
