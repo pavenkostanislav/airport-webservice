@@ -6,12 +6,12 @@ import java.util.TimeZone;
 
 import com.example.demo.controller.Vocabulary;
 import com.example.demo.controller.VocabularyKeys;
-import com.example.demo.dao.ISchedule;
+import com.example.demo.dao.IScheduleRepository;
 import com.example.demo.model.Schedule;
 
-public class ScheduleService extends GenericService<Schedule, ISchedule> {
+public class ScheduleService extends GenericService<Schedule, IScheduleRepository> {
 	@Override
-	public Schedule set(ISchedule crudRepository, Schedule row) throws Exception {
+	public Schedule set(IScheduleRepository crudRepository, Schedule row) throws Exception {
 		if(!this.verifyEmptyLane(crudRepository, row)) {
 			throw new Exception(Vocabulary.dictionary.get(VocabularyKeys.badRequest));
 		}
@@ -30,7 +30,7 @@ public class ScheduleService extends GenericService<Schedule, ISchedule> {
 		return calendar;
 	}
 	
-	private boolean verifyEmptyLane(ISchedule scheduleRepository, Schedule row) throws SQLException {
+	private boolean verifyEmptyLane(IScheduleRepository scheduleRepository, Schedule row) throws SQLException {
 		Calendar from = row.getArrival();
 		Calendar until = row.getDeparture();
 		Long airportid = row.getAirportId().longValue();

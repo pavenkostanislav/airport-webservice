@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.demo.model.Schedule;
 
-public interface ISchedule extends CrudRepository<Schedule, Long> {
+public interface IScheduleRepository extends CrudRepository<Schedule, Long> {
 	@Query(value = "select count(s) from Schedule s where "+
 "(s.arrival between :dtfrom and :dtuntil or s.departure between :dtfrom and :dtuntil "+
 "or :dtfrom between s.arrival and s.departure or :dtuntil between s.arrival and s.departure) "+
