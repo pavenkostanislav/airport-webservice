@@ -1,17 +1,17 @@
 package com.example.demo.controller;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dao.ILaneRepository;
 import com.example.demo.model.Lane;
-import com.example.demo.service.GenericService;
+import com.example.demo.service.LaneService;
 
 @RestController
 @RequestMapping("/api/lane")
-public class LaneController extends GenericController<Lane, CrudRepository<Lane, Long>> {
+public class LaneController extends GenericController<Lane, ILaneRepository> {
 
 	public LaneController() {
-		super(new GenericService<Lane, CrudRepository<Lane, Long>>());
+		super(new LaneService());
 	}
 }

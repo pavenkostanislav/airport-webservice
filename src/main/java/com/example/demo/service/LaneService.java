@@ -15,7 +15,7 @@ public class LaneService extends GenericService<Lane, ILaneRepository> {
 	@Override
 	@Cacheable(cacheNames="getLane")
 	public Lane get(ILaneRepository crudRepository, Long id) {
-        logger.info("get lane: " + id);
+        logger.info("get lane: id=" + id);
 		return super.get(crudRepository, id);
 	}
 }
