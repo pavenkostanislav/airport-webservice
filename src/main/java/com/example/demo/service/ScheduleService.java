@@ -3,13 +3,10 @@ package com.example.demo.service;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.example.demo.controller.Vocabulary;
 import com.example.demo.controller.VocabularyKeys;
 import com.example.demo.dao.ISchedule;
 import com.example.demo.model.Schedule;
-
 
 public class ScheduleService extends GenericService<Schedule, ISchedule> {
 	@Override
@@ -32,11 +29,8 @@ public class ScheduleService extends GenericService<Schedule, ISchedule> {
 		return calendar;
 	}
 	
-	private boolean verifyEmptyLane(CrudRepository<Schedule, Long> crudRepository, Schedule row) {
-		/*String sql = "SELECT COUNT(s.*) FROM Schedule s";
-Query q = em.createQuery(sql);
-long count = (long)q.getSingleResult();*/
-		
-		return true;
+	private boolean verifyEmptyLane(ISchedule scheduleRepository, Schedule row) {
+		long countFlightByPeriod =  scheduleRepository.countFlightByPeriod(row.getArrival(), row.getDeparture(), row.getAirportId().longValue());
+		return countFlightByPeriod < 2;
 	}
 }
