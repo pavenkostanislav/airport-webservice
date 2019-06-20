@@ -145,3 +145,16 @@ Response
 - Ограничения:
  - Время регистрации вылета и прилета указывается с точностью до часа
  - Количество прилетев и вылетов не должно превышать количества полос в аэропорту.
+ 
+ #####Примеры в формате xml
+
+Request
+
+```
+POST /api/schedule HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Cache-Control: no-cache
+
+{"flight":"ЮТ 351", "arrival": "2019-06-20T12:33:33", "departure": "2019-06-20T18:22:22", "laneId": 1, "airportId":1 }
+```
